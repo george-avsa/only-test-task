@@ -1,3 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=PT+Sans:wght@400;700&display=swap');
+@import './reset.css';
+@import './mixins.scss';
+
 html {
-    background: red;
+    // most common font
+    font-family: "PT Sans", serif;
+    font-weight: 400;
+    background: #F4F5F9;
+}
+
+.wrapper {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+    // l screens
+    // max-width: 1440px;
+    max-width: 1100px;
+    margin: 0 auto;
+
+    box-sizing: border-box;
+    padding: 0px 80px;
+}
+
+.wrapper__line--horizontal {
+    @include square($axis: ax, $side: center);
+}
+
+.wrapper__line--right {
+    @include square($axis: ay, $side: right);
+}
+.wrapper__line--left {
+    @include square($axis: ay, $side: left);
+}
+.wrapper__line--center {
+    @include square($axis: ay, $side: center);
+}
+
+.wrapper__circle {
+    position: absolute;
+    top: calc(50% - 265px);
+    left: calc(50% - 265px);
+    width: 530px;
+    height: 530px;
+    border-radius: 50%;
+    border: 1px solid rgba(66, 86, 122, 0.2);
+    opacity: 1;
+
+    transition: rotate 1s ease-out;
+    
+    @media screen and (max-width: 1500px) {
+        width: 400px;
+        height: 400px;
+        top: calc(50% - 200px);
+        left: calc(50% - 200px);
+    }
+}
+
+.marker__block {
+    position: absolute;
+    left: calc(50% - 4px);
+    width: 6px;
+    height: 100%;
+}
+
+.cirlce__marker {
+    position: absolute;
+    top: -4px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #42567A;
+    cursor: pointer;
+
+    
+    .marker__hover {
+        position: absolute;
+        width: 56px;
+        height: 56px;
+        background: #F4F5F9;
+        border: 1px solid rgba(48, 62, 88, .5);
+        top: calc(-28px + 4px);
+        left: calc(-28px + 4px);
+        border-radius: 50%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .marker__hover--active {
+        display: flex;
+    }
+    
+    &:hover {
+        .marker__hover {
+            display: flex;
+        }
+    }
+}
+
+.marker__number-text {
+    color: #42567A;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+
+h1 {
+    position: relative;
+    color: var(--Black-blue, #42567A);
+    font-family: 'PT Sans', sans-serif;
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.title__line {
+    position: absolute;
+    top: 0;
+    left: -79px;
+    width: 5px;
+    background: linear-gradient(180deg, #3866EE -5%, #EF5DA8 85%);
+    height: 100%;
 }
