@@ -86,6 +86,8 @@ html {
         display: none;
         align-items: center;
         justify-content: center;
+
+        transition: rotate 1s ease-out;
     }
 
     .marker__hover--active {
@@ -117,6 +119,10 @@ h1 {
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
+    
+    @media screen and (max-width: 1500px) {
+        font-size: 48px;
+    }
 }
 
 .title__line {

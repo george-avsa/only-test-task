@@ -19,19 +19,17 @@ function getMinimizedRotation(initialRotation: number): number {
     const leftRotation = 360 - initialRotation + 30; 
     const rightRotation = 30 - initialRotation;
     let nextRotation: number;
-    if (Math.abs(leftRotation) > Math.abs(rightRotation)) {
+    if (Math.abs(leftRotation) >= Math.abs(rightRotation)) {
         nextRotation = rightRotation
     } else {
         nextRotation = leftRotation
     }
-    console.log(nextRotation)
     return nextRotation;
 }
 
-function generateRotationMap(dateIntervals: dateInterval[], circleRotation: number): dateInterval[] {
+function generateRotationMap(dateIntervals: dateInterval[]): dateInterval[] {
     let initialRotation = 30;
-    const rotationStep = 360 / dateIntervals.length;
-    const dateIntervalsMapped = dateIntervals.map(dateInterval => {
+    const rotationStep = 360 / dateIntervals.length;    const dateIntervalsMapped = dateIntervals.map(dateInterval => {
         const nextRotation = getMinimizedRotation(initialRotation)
         const keklol = {...dateInterval, currentRotation: initialRotation, nextRotation};
         initialRotation += rotationStep
@@ -44,8 +42,6 @@ export default function Circle() {
 
     const circleRef = useRef(null);
     const [circleRotation, setCircleRotation] = useState(0); 
-    const [localRotation, setLocalRotation] = useState(0); 
-    const [fullSpins, setFullSpins] = useState(1);
 
     const [dateIntevals, setDateIntevals] = useState([
         {
@@ -91,7 +87,7 @@ export default function Circle() {
     ]);
 
     useEffect(() => {
-        setDateIntevals(generateRotationMap(dateIntevals, 0));
+        setDateIntevals(generateRotationMap(dateIntevals));
     }, []);
 
     function clickHandlerMarker(e: React.MouseEvent<HTMLElement>) {
@@ -100,7 +96,6 @@ export default function Circle() {
             const circleId = Number.parseInt(clickedMarker.innerText);
                 const markerBlock = clickedMarker.closest('.marker__block');
                 if (isHtmlElement(markerBlock)) {
-                    const circleRotation = Number.parseInt(circleRef.current.style.rotate) || 0;
                     const nextRotation = Number.parseInt(markerBlock.getAttribute('data-rotation'))
                     circleRef.current.style.rotate = `${circleRotation + nextRotation}deg`;
                     const indexClicked = Number.parseInt(markerBlock?.innerText) - 1;
@@ -110,31 +105,17 @@ export default function Circle() {
                     let initialRotation = 30;
                     const newkeklol  = newDateIntervals.map((dateInteval, i) => {
                         const nextMarkerRotation = getMinimizedRotation(initialRotation)
-                        console.log(nextMarkerRotation)
                         initialRotation += rotationStep
                         if (dateInteval.index === indexClicked + 1) {
                             return {...dateInteval, active: true, nextRotation: nextMarkerRotation}
                         }
                         return {...dateInteval, active: false, nextRotation: nextMarkerRotation}
                     });
-                    console.log(newkeklol)
+                    setCircleRotation((circleRotation) => circleRotation + nextRotation);
                     setDateIntevals(newkeklol.sort((a:dateInterval, b:dateInterval) => a.index - b.index));
             }
         }
     }
-
-    useEffect(() => {
-        if (localRotation) {
-            const circleRotation = Number.parseInt(circleRef.current.style.rotate) || 0;
-            let spins = fullSpins;
-            if (circleRotation > fullSpins * 360 + 30 - localRotation && circleRotation != 0) {
-                setFullSpins(() => fullSpins + 1);
-                spins += 1
-            }
-            circleRef.current.style.rotate = `${spins * 360 + 30 - localRotation}deg`;
-            setCircleRotation(spins * 360 + 30 - localRotation);
-        } 
-    }, [localRotation]);
 
     return (
         <div className="wrapper__circle" ref={circleRef}>
