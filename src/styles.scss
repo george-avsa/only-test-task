@@ -47,7 +47,17 @@ html {
     @include square($axis: ay, $side: center);
 }
 
-.wrapper__circle {
+.circle__wrapper {
+    position: relative;
+    height: 350px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle {
     position: absolute;
     top: calc(50% - 265px);
     left: calc(50% - 265px);
@@ -66,8 +76,8 @@ html {
     @media screen and (max-width: 1500px) {
         width: 350px;
         height: 350px;
-        top: calc(50% - 200px);
-        left: calc(50% - 200px);
+        top: calc(50% - 175px);
+        left: calc(50% - 175px);
     }
 }
 
@@ -114,6 +124,7 @@ html {
             display: flex;
         }
     }
+
 }
 
 .marker__number-text {
@@ -125,6 +136,37 @@ html {
     cursor: pointer;
 }
 
+.marker__category {
+    position: absolute;
+    left: calc(100% + 20px);
+
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    color: var(--Black-blue, #42567A);
+    font-family: 'PT Sans';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+}
+
+@keyframes slidein {
+    0% {
+        opacity: 0;
+    }
+  
+    75% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+  }
+  
 
 h1 {
     position: relative;
@@ -153,6 +195,8 @@ h1 {
     display: flex;
     gap: 65px;
 
+    margin-top: -3%;
+
     transition: rotate 1s ease-out;
 }
 
@@ -161,7 +205,6 @@ h1 {
     font-size: 200px;
     font-style: normal;
     font-weight: 700;
-    line-height: 160px;
     letter-spacing: -4px; 
 
     @media screen and (max-width: 1500px) {
@@ -263,7 +306,42 @@ h1 {
     }
 }
 
+.circle__controls {
+    position: absolute;
+    left: 0;
+    bottom: 0
+}
 
-.slider-controller {
+.circle__position {
+    color: #42567A;
+    font-family: PT Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal; 
+}
 
+.circle__controls-buttons {
+    display: flex;
+
+    margin-top: 20px;
+}
+
+.circle__button {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+    border: 2px solid rgba(66, 86, 122, .5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    &:not(:first-child) {
+        margin-left: 10px;
+        rotate: 180deg;
+    }
 }

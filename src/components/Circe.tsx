@@ -1,42 +1,9 @@
 import React, { ReactEventHandler, useEffect, useRef, useState } from "react";
 import { isHtmlElement } from "../types/isHtmlElement";
-
-type markerRotationMap = {
-    currentRotation: number,
-    nextRotation: number,
-}
-
-type dateInterval = {
-    firstDate: number,
-    lastDate: number,
-    index: number,
-    currentRotation: number,
-    nextRotation: number,
-    active: boolean
-}
-
-function getMinimizedRotation(initialRotation: number): number {
-    const leftRotation = 360 - initialRotation + 30; 
-    const rightRotation = 30 - initialRotation;
-    let nextRotation: number;
-    if (Math.abs(leftRotation) >= Math.abs(rightRotation)) {
-        nextRotation = rightRotation
-    } else {
-        nextRotation = leftRotation
-    }
-    return nextRotation;
-}
-
-function generateRotationMap(dateIntervals: dateInterval[]): dateInterval[] {
-    let initialRotation = 30;
-    const rotationStep = 360 / dateIntervals.length;    const dateIntervalsMapped = dateIntervals.map(dateInterval => {
-        const nextRotation = getMinimizedRotation(initialRotation)
-        const keklol = {...dateInterval, currentRotation: initialRotation, nextRotation};
-        initialRotation += rotationStep
-        return keklol;
-    }); 
-    return dateIntervalsMapped;
-}
+import { generateRotationMap } from "../handlers/getRotationMap";
+import { getNewIntervals } from "../handlers/getNewIntervals";
+import { dateInterval } from "../types/dateInterval"
+import { ReactComponent as CircleArrow } from "./../assets/arrowCircle.svg";
 
 export default function Circle() {
 
@@ -101,50 +68,81 @@ export default function Circle() {
     function clickHandlerMarker(e: React.MouseEvent<HTMLElement>) {
         const clickedMarker = e.target;
         if (isHtmlElement(clickedMarker)) {
-            const circleId = Number.parseInt(clickedMarker.innerText);
-                const markerBlock = clickedMarker.closest('.marker__block');
-                if (isHtmlElement(markerBlock)) {
-                    const nextRotation = Number.parseInt(markerBlock.getAttribute('data-rotation'))
-                    circleRef.current.style.rotate = `${circleRotation + nextRotation}deg`;
-                    const indexClicked = Number.parseInt(markerBlock?.innerText) - 1;
-                    const newDateIntervals = [...dateIntevals.slice(indexClicked, dateIntevals.length), ...dateIntevals.slice(0, indexClicked)]
-                    // сonst indexOrder = newDateIntervals.map()
-                    const rotationStep = 360 / newDateIntervals.length;
-                    let initialRotation = 30;
-                    const newkeklol  = newDateIntervals.map((dateInteval, i) => {
-                        const nextMarkerRotation = getMinimizedRotation(initialRotation)
-                        initialRotation += rotationStep
-                        if (dateInteval.index === indexClicked + 1) {
-                            return {...dateInteval, active: true, nextRotation: nextMarkerRotation}
-                        }
-                        return {...dateInteval, active: false, nextRotation: nextMarkerRotation}
-                    });
-                    setCircleRotation((circleRotation) => circleRotation + nextRotation);
-                    setDateIntevals(newkeklol.sort((a:dateInterval, b:dateInterval) => a.index - b.index));
+            const markerBlock = clickedMarker.closest('.marker__block');
+            if (isHtmlElement(markerBlock)) {
+                const nextRotation = Number.parseInt(markerBlock.getAttribute('data-rotation'))
+                circleRef.current.style.rotate = `${circleRotation + nextRotation}deg`;
+                const indexClicked = Number.parseInt(markerBlock?.innerText) - 1;
+                const newIntervals = getNewIntervals(dateIntevals, indexClicked);
+                setCircleRotation((circleRotation) => circleRotation + nextRotation);
+                setDateIntevals(newIntervals.sort((a:dateInterval, b:dateInterval) => a.index - b.index));
             }
         }
     }
 
+    const handleCircleLeft = () => {
+        const dateIntervalsLength = Object.keys(dateIntevals).length;
+        const nextRotation = 360 / dateIntervalsLength;
+        const currentIndex = dateIntevals.find(dateInteval => dateInteval.active).index;
+        let newIndex: number;
+        if (currentIndex === 1) {
+            newIndex = dateIntervalsLength - 1;
+        } else {
+            newIndex = currentIndex - 2;
+        }
+        const newIntervals = getNewIntervals(dateIntevals, newIndex);
+        circleRef.current.style.rotate = `${circleRotation + nextRotation}deg`;
+
+        // if element is rotated after rerender and it is invisible, animation of marker element will be wrong
+        // in case, when marker is active (on hover) it works good, without code below - rotation doesn't repeat circle's rotation
+        circleRef.current.querySelectorAll('.marker__hover').forEach((markerHoverElement:HTMLDivElement) => {
+            if (markerHoverElement?.innerText === String(newIndex + 1)) {
+                markerHoverElement.classList.add('marker__hover--active');
+            }
+        });
+        setCircleRotation((circleRotation) => circleRotation + nextRotation);
+        setDateIntevals(newIntervals.sort((a:dateInterval, b:dateInterval) => a.index - b.index));
+    }
+
     return (
-        <div className="wrapper__circle" ref={circleRef}>
+        <div className="circle__wrapper">
+        <div className="circle" ref={circleRef}>
                 {dateIntevals.map((dateInterval, i) => (
                     <div className='marker__block' 
-                        key={`${dateInterval.firstDate}-${dateInterval.lastDate}`} 
-                        style={{rotate: `${dateInterval.currentRotation}deg`}}
-                        data-rotation={dateInterval.nextRotation}
+                    key={`${dateInterval.firstDate}-${dateInterval.lastDate}`} 
+                    style={{rotate: `${dateInterval.currentRotation}deg`}}
+                    data-rotation={dateInterval.nextRotation}
                     >
                         <div className="cirlce__marker" onClick={clickHandlerMarker}>
-                            <div className={`marker__hover${dateInterval.active ? ' marker__hover--active' : ''}`} style={{rotate: `${-dateInterval.currentRotation - (circleRotation % 360)}deg`}}>
-                                <span className="marker__number-text"></span>
-                                {i + 1}
+                            <div className={`marker__hover${dateInterval.active ? ' marker__hover--active' : ''}`} style={{rotate: `${-dateInterval.currentRotation - (circleRotation % 360) - Math.trunc(circleRotation / 360) * 360}deg`}}>
+                                <span className="marker__number-text">
+                                    {i + 1}
+                                </span>
+                                {dateInterval.active && (
+                                    <div className="marker__category">
+                                        History
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
                 ))}
-                <div className="circle__dates" style={{rotate: `${-(circleRotation % 360)}deg`}}>
-                    <div className="circle__date circle__date--first">2021</div>
-                    <div className="circle__date circle__date--second">2024</div>
-                </div>
         </div>
+        <div className="circle__dates">
+            <div className="circle__date circle__date--first">2021</div>
+            <div className="circle__date circle__date--second">2024</div>
+        </div>
+        <div className='circle__controls'>
+        <span className='circle__position'>0{dateIntevals.find((dateInteval: dateInterval) => dateInteval.active).index}/06</span>
+        <div className='circle__controls-buttons'>
+            <div className="circle__button" onClick={handleCircleLeft}>
+                <CircleArrow />
+            </div>
+            <div className="circle__button circle__button--next">
+                <CircleArrow />
+            </div>
+        </div>
+        </div>
+                </div>
     );
 }
