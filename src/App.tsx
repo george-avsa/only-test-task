@@ -9,11 +9,11 @@ export default function App() {
             <div className="wrapper__line--right"></div>
             <div className="wrapper__line--left"></div>
             <div className="wrapper__line--center"></div>
-            <Circle></Circle>
             <h1>
                 Исторические <br/>даты
                 <div className='title__line'></div>
             </h1>
+            <Circle></Circle>
             <Slider></Slider>
         </div>
     )

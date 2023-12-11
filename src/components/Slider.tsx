@@ -43,8 +43,6 @@ export const Slider = () => {
     right: true,
   });
 
-  useEffect(() => {console.log(controllerVisibility)}, [controllerVisibility])
-
   return <div className='slider'>
   <Swiper
   ref={sliderRef}
