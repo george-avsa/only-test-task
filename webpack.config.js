@@ -18,13 +18,25 @@ module.exports = {
                 exclude: '/node_modules/'
             },
             {
-                test: /\.s[ac]ss$/i,
+                test: /\.(sa|sc|c)ss$/,
                 use: [
                   "style-loader",
                   "css-loader",
                   "sass-loader",
                 ],
               },
+              {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                  {
+                    loader: 'file-loader',
+                  },
+                ],
+              },
+              {
+                test: /\.svg$/,
+                use: ['@svgr/webpack', 'url-loader'],
+            },
         ],
     },
     output: {

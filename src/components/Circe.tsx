@@ -84,6 +84,14 @@ export default function Circle() {
             nextRotation: 0,
             active: false,
         },
+        {
+            firstDate: 2023,
+            lastDate: 2024,
+            index: 6,
+            currentRotation: 0,
+            nextRotation: 0,
+            active: false,
+        },
     ]);
 
     useEffect(() => {
@@ -133,6 +141,10 @@ export default function Circle() {
                         </div>
                     </div>
                 ))}
+                <div className="circle__dates" style={{rotate: `${-(circleRotation % 360)}deg`}}>
+                    <div className="circle__date circle__date--first">2021</div>
+                    <div className="circle__date circle__date--second">2024</div>
+                </div>
         </div>
     );
 }

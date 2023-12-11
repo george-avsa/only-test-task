@@ -21,6 +21,16 @@ html {
 
     box-sizing: border-box;
     padding: 0px 80px;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @media screen and (max-width: 1500px) {
+        padding: 40px 80px;
+    }
 }
 
 .wrapper__line--horizontal {
@@ -47,11 +57,15 @@ html {
     border: 1px solid rgba(66, 86, 122, 0.2);
     opacity: 1;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     transition: rotate 1s ease-out;
     
     @media screen and (max-width: 1500px) {
-        width: 400px;
-        height: 400px;
+        width: 350px;
+        height: 350px;
         top: calc(50% - 200px);
         left: calc(50% - 200px);
     }
@@ -62,6 +76,7 @@ html {
     left: calc(50% - 4px);
     width: 6px;
     height: 100%;
+    z-index: 10;
 }
 
 .cirlce__marker {
@@ -132,4 +147,123 @@ h1 {
     width: 5px;
     background: linear-gradient(180deg, #3866EE -5%, #EF5DA8 85%);
     height: 100%;
+}
+
+.circle__dates {
+    display: flex;
+    gap: 65px;
+
+    transition: rotate 1s ease-out;
+}
+
+.circle__date {
+    font-family: 'PT Sans', sans-serif;
+    font-size: 200px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 160px;
+    letter-spacing: -4px; 
+
+    @media screen and (max-width: 1500px) {
+        font-size: 160px;
+    }
+
+    &--first {
+        color: #5D5FEF;
+    }
+
+    &--second {
+        color: #EF5DA8;
+    }
+}
+
+.slider {
+    position: relative;
+}
+
+.swiper-button-prev, .swiper-button-next {
+    width: 40px;
+    height: 40px;
+    background: #fff;
+
+    box-shadow: 0px 0px 15px 0px rgba(56, 119, 238, 0.10); 
+    border-radius: 50%;
+    rotate: 180deg;
+
+    // left: -40px;
+    
+    &::after {
+        position: absolute;
+        top: calc(50% - 10px);
+        left: calc(50% - 5px);
+        content: '';
+        width: 10px;
+        height: 20px;
+        background: url('./assets/arrowSlider.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}
+
+.swiper-button-next {
+    right: -10px;
+    z-index: 100;
+    &::after {
+        rotate: 180deg;
+    }
+}
+
+.swiper-button-disabled {
+    display: none;
+}
+
+.slider__date {
+    color: #3877EE;
+    font-family: Bebas Neue;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 30px */
+    text-transform: uppercase; 
+
+    @media screen and (max-width: 1500px) {
+        font-size: 20px;
+    }
+}
+
+.slider__text {
+    color: #42567A;
+    font-family: PT Sans;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 150% */ 
+    @media screen and (max-width: 1500px) {
+        font-size: 16px;
+    }
+}
+
+.slider-controller {
+    position: absolute;
+    border-radius: 50%;
+    right: -60px;
+    top: calc(50% - 20px);
+    box-shadow: 0px 0px 15px 0px rgba(56, 119, 238, 0.10);
+    background: #fff;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    
+    &--left{
+       left: -60px;
+       rotate: 180deg;
+    }
+}
+
+
+.slider-controller {
+
 }
