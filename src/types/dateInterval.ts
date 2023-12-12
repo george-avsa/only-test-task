@@ -1,3 +1,5 @@
+import { dateEvent } from "./dateEvent"
+
 export type dateInterval = {
     firstDate: number,
     lastDate: number,
@@ -6,4 +8,5 @@ export type dateInterval = {
     nextRotation: number,
     active: boolean,
     category: string
+    dateEvents: dateEvent[],
 }
