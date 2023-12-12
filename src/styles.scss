@@ -96,36 +96,29 @@ html {
     height: 6px;
     border-radius: 50%;
     background: #42567A;
-    cursor: pointer;
-
-    
-    .marker__hover {
-        position: absolute;
-        width: 56px;
-        height: 56px;
-        background: #F4F5F9;
-        border: 1px solid rgba(48, 62, 88, .5);
-        top: calc(-28px + 4px);
-        left: calc(-28px + 4px);
-        border-radius: 50%;
-        display: none;
-        align-items: center;
-        justify-content: center;
-
-        transition: rotate 1s ease-out;
-    }
-
-    .marker__hover--active {
-        display: flex;
-    }
-    
-    &:hover {
-        .marker__hover {
-            display: flex;
-        }
-    }
-
+    cursor: pointer;   
 }
+
+.marker__hover {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    background: #F4F5F9;
+    border: 1px solid rgba(48, 62, 88, .5);
+    top: calc(-28px + 4px);
+    left: calc(-28px + 4px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scale: 0; transform: translate(0px); translate: none; rotate: none;
+    
+}
+
+.marker__hover--active { 
+    transform: translate(0px); translate: none; rotate: none;
+}
+
 
 .marker__number-text {
     color: #42567A;
@@ -134,6 +127,7 @@ html {
     font-style: normal;
     font-weight: 400;
     cursor: pointer;
+    transition: rotate 1s ease-out;
 }
 
 .marker__category {
@@ -151,22 +145,7 @@ html {
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
-}
-
-@keyframes slidein {
-    0% {
-        opacity: 0;
-    }
-  
-    75% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-  }
-  
+} 
 
 h1 {
     position: relative;

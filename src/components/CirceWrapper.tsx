@@ -1,4 +1,4 @@
-import React, { ReactEventHandler, useEffect, useRef, useState } from "react";
+import React, { Dispatch, ReactEventHandler, SetStateAction, useEffect, useRef, useState } from "react";
 import { isHtmlElement } from "../types/isHtmlElement";
 import { generateRotationMap } from "../handlers/getRotationMap";
 import { getNewIntervals } from "../handlers/getNewIntervals";
@@ -7,8 +7,16 @@ import Circle from "./Circle";
 import { getCircleButtonsVisibility } from "../handlers/getCircleButtonsVisibility";
 import CircleControls from "./CircleControls";
 import CircleDates from "./CircleDates";
+import { getActiveDates } from "../handlers/getActiveDates";
+import { data } from "../data";
 
-export default function CirceWrapper() {
+export default function CirceWrapper({
+    dateIntervals,
+    setDateIntervals
+}: {
+    dateIntervals: dateInterval[],
+    setDateIntervals: Dispatch<SetStateAction<dateInterval[]>>
+}) {
 
     const circleRef = useRef(null);
     const [circleRotation, setCircleRotation] = useState(0); 
@@ -18,51 +26,8 @@ export default function CirceWrapper() {
         right: true,
     })
 
-    const [dateIntevals, setDateIntevals] = useState([
-        {
-            firstDate: 1993,
-            lastDate: 1995,
-            index: 1,
-            currentRotation: 0,
-            nextRotation: 0,
-            active: true,
-        },
-        {
-            firstDate: 1995,
-            lastDate: 1998,
-            index: 2,
-            currentRotation: 0,
-            nextRotation: 0,
-            active: false,
-        },
-        {
-            firstDate: 1999,
-            lastDate: 2005,
-            index: 3,
-            currentRotation: 0,
-            nextRotation: 0,
-            active: false,
-        },
-        {
-            firstDate: 2005,
-            lastDate: 2018,
-            index: 4,
-            currentRotation: 0,
-            nextRotation: 0,
-            active: false,
-        },
-        {
-            firstDate: 2018,
-            lastDate: 2023,
-            index: 5,
-            currentRotation: 0,
-            nextRotation: 0,
-            active: false,
-        },
-    ]);
-
     useEffect(() => {
-        setDateIntevals(generateRotationMap(dateIntevals));
+        setDateIntervals(generateRotationMap(dateIntervals));
     }, []);
 
     return (
@@ -70,21 +35,21 @@ export default function CirceWrapper() {
             <Circle 
                 circleRef={circleRef}
                 circleRotation={circleRotation}
-                dateIntervals={dateIntevals}
+                dateIntervals={dateIntervals}
                 setCircleControls={setCircleControls}
                 setCircleRotation={setCircleRotation}
-                setDateIntevals={setDateIntevals}
+                setDateIntevals={setDateIntervals}
             ></Circle>
             <CircleControls
-                dateIntervals={dateIntevals}
+                dateIntervals={dateIntervals}
                 circleRef={circleRef}
                 circleRotation={circleRotation}
                 circleControls={circleControls}
                 setCircleRotation={setCircleRotation}
                 setCircleControls={setCircleControls}
-                setDateIntervals={setDateIntevals}
+                setDateIntervals={setDateIntervals}
             ></CircleControls>
-            <CircleDates></CircleDates>
+            <CircleDates dates={getActiveDates(dateIntervals)}></CircleDates>
         </div>
     );
 }

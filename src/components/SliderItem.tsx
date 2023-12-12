@@ -1,12 +1,17 @@
 import React from "react";
 import { SwiperSlide } from "swiper/react";
 
-function SliderItem() {
+function SliderItem({dateEvent} : {
+    dateEvent: {
+        year: number,
+        text: string,
+    }
+}) {
     return (
         <>
-            <p className='slider__date'>2021</p>
+            <p className='slider__date'>{dateEvent.year}</p>
             <p className='slider__text'>
-            13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды
+                {dateEvent.text}
             </p>
         </>
     );

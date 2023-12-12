@@ -5,8 +5,13 @@ import 'swiper/css/navigation';
 import {ReactComponent as SearchIcon} from './../assets/arrowSlider.svg';
 import SliderItem from './SliderItem';
 import SwiperComponent from './Swiper';
+import { dateInterval } from '../types/dateInterval';
 
-export const Slider = () => {
+export const Slider = ({
+  dateIntervals
+}: {
+  dateIntervals: dateInterval[]
+}) => {
   const sliderRef = useRef(null);
 
   const handlePrev = useCallback(() => {
@@ -26,6 +31,7 @@ export const Slider = () => {
   return (
     <div className='slider'>
       <SwiperComponent
+        dateIntervals={dateIntervals}
         sliderRef={sliderRef}
         setControllerVisibility={setControllerVisibility}
       ></SwiperComponent>

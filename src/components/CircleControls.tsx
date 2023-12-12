@@ -6,6 +6,7 @@ import { CircleButtonsVisibility } from "../types/circleButtonsVisibility";
 import { getCircleButtonsVisibility } from "../handlers/getCircleButtonsVisibility";
 import { getNewIntervals } from "../handlers/getNewIntervals";
 import CirclePosition from "./CirclePosition";
+import { gsap } from "gsap";
 
 type CircleControlsProps = {
     dateIntervals: dateInterval[],
@@ -49,11 +50,11 @@ function CircleControls({
                 
                 // if element is rotated after rerender and it is invisible, animation of marker element will be wrong
                 // in case, when marker is active (on hover) it works good, without code below - rotation doesn't repeat circle's rotation
-                circleRef.current.querySelectorAll('.marker__hover').forEach((markerHoverElement:HTMLDivElement) => {
-                    if (markerHoverElement?.innerText === String(newIndex + 1)) {
-                        markerHoverElement.classList.add('marker__hover--active');
-                    }
-                });
+                // circleRef.current.querySelectorAll('.marker__hover').forEach((markerHoverElement:HTMLDivElement) => {
+                //     if (markerHoverElement?.innerText === String(newIndex + 1)) {
+                //         markerHoverElement.classList.add('marker__hover--active');
+                //     }
+                // });
                 setCircleRotation((circleRotation) => circleRotation + nextRotation);
                 setDateIntervals(newIntervals.sort((a:dateInterval, b:dateInterval) => a.index - b.index));
             }
