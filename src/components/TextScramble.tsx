@@ -23,6 +23,9 @@ function TextScramble({
             let keklol = setInterval(() => {
                 setLocalDate(localDate => String(Number.parseInt(localDate) + step));
             }, 1000 / difference);
+            if (setIntervalId !== null) {
+                clearInterval(intervalId);
+            }
             setIntervalId(() => keklol);
         }
         prevValue.current = children;
@@ -32,15 +35,9 @@ function TextScramble({
     useEffect(() => {
         if (localDate === children) {
             clearInterval(intervalId);
+            setIntervalId(null);
         };
     }, [localDate, intervalId]);
-
-    useEffect(() => {
-        return () => {
-            clearInterval(intervalId);
-            setIntervalId(() => null);
-        };
-    }, [])
 
     return (
         <p ref={dataRef}>
