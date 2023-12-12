@@ -76,7 +76,7 @@ html {
     @media screen and (max-width: 1500px) {
         width: 350px;
         height: 350px;
-        top: calc(50% - 175px);
+        top: calc(50% - 185px);
         left: calc(50% - 175px);
     }
 }
@@ -340,8 +340,15 @@ h1 {
 
     cursor: pointer;
 
+    background-image: url('./assets/arrowCircle.svg');
+    background-position: center;
+
     &:not(:first-child) {
         margin-left: 10px;
         rotate: 180deg;
+    }
+
+    &--disabled {
+        opacity: .5;
     }
 }

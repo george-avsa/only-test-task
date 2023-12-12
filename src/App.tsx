@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Circle from './components/Circe';
+import CirceWrapper from './components/CirceWrapper';
 import { Slider } from './components/Slider';
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
                 Исторические <br/>даты
                 <div className='title__line'></div>
             </h1>
-            <Circle></Circle>
+            <CirceWrapper></CirceWrapper>
             <Slider></Slider>
         </div>
     )

@@ -1,1 +1,1 @@
-export const isHtmlElement = (v: any): v is HTMLElement => v instanceof HTMLElement;
+export const isHtmlElement = (v: any): v is HTMLElement => v instanceof HTMLElement || v instanceof SVGElement;
