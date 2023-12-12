@@ -1,10 +1,11 @@
-import React, { Dispatch, Ref, RefObject, SetStateAction } from "react";
+import React, { Dispatch, Ref, RefObject, SetStateAction, useEffect } from "react";
 import { isHtmlElement } from "../types/isHtmlElement";
 import { getNewIntervals } from "../handlers/getNewIntervals";
 import { getCircleButtonsVisibility } from "../handlers/getCircleButtonsVisibility";
 import { dateInterval } from "../types/dateInterval";
 import { CircleButtonsVisibility } from "../types/circleButtonsVisibility";
 import CircleMarker from "./CircleMarker";
+import { gsap } from "gsap";
 
 type CircleProps = {
     circleRef: RefObject<HTMLDivElement>,
@@ -33,6 +34,11 @@ function Circle({circleRef, circleRotation, dateIntervals, setCircleControls, se
             }
         }
     }
+
+    useEffect(() => {
+        gsap.to('.marker__hover', {scale: 0, duration: 0.2});
+        gsap.to('.marker__hover--active', {scale: 1, duration: 0.2});
+    }, [dateIntervals]);
 
     return (
         <div className="circle" ref={circleRef}>

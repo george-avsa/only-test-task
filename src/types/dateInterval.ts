@@ -4,5 +4,6 @@ export type dateInterval = {
     index: number,
     currentRotation: number,
     nextRotation: number,
-    active: boolean
+    active: boolean,
+    category: string
 }

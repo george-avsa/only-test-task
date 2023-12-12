@@ -26,6 +26,7 @@ export default function CirceWrapper() {
             currentRotation: 0,
             nextRotation: 0,
             active: true,
+            category: 'history',
         },
         {
             firstDate: 1995,
@@ -34,6 +35,7 @@ export default function CirceWrapper() {
             currentRotation: 0,
             nextRotation: 0,
             active: false,
+            category: 'politics',
         },
         {
             firstDate: 1999,
@@ -42,6 +44,7 @@ export default function CirceWrapper() {
             currentRotation: 0,
             nextRotation: 0,
             active: false,
+            category: 'sport',
         },
         {
             firstDate: 2005,
@@ -50,6 +53,7 @@ export default function CirceWrapper() {
             currentRotation: 0,
             nextRotation: 0,
             active: false,
+            category: 'art',
         },
         {
             firstDate: 2018,
@@ -58,6 +62,16 @@ export default function CirceWrapper() {
             currentRotation: 0,
             nextRotation: 0,
             active: false,
+            category: 'news',
+        },
+        {
+            firstDate: 2023,
+            lastDate: 2024,
+            index: 6,
+            currentRotation: 0,
+            nextRotation: 0,
+            active: false,
+            category: 'events',
         },
     ]);
 
