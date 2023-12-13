@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import CirceWrapper from './components/CirceWrapper';
 import { Slider } from './components/Slider';
 import { data } from './data';
@@ -6,6 +6,10 @@ import { data } from './data';
 export default function App() {
 
     const [dateIntervals, setDateIntervals] = useState(data);
+
+    
+    const sliderRef = useRef(null);
+
 
     return (
         <div className='wrapper'>
@@ -18,10 +22,12 @@ export default function App() {
                 <div className='title__line'></div>
             </h1>
             <CirceWrapper
+                sliderRef={sliderRef}
                 dateIntervals={dateIntervals}
                 setDateIntervals={setDateIntervals}
                 ></CirceWrapper>
             <Slider
+                sliderRef={sliderRef}
                 dateIntervals={dateIntervals}
             ></Slider>
         </div>

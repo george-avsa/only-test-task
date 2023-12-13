@@ -1,4 +1,4 @@
-import React, { Dispatch, ReactEventHandler, SetStateAction, useEffect, useRef, useState } from "react";
+import React, { Dispatch, ReactEventHandler, RefObject, SetStateAction, useEffect, useRef, useState } from "react";
 import { isHtmlElement } from "../types/isHtmlElement";
 import { generateRotationMap } from "../handlers/getRotationMap";
 import { getNewIntervals } from "../handlers/getNewIntervals";
@@ -12,13 +12,16 @@ import { data } from "../data";
 
 export default function CirceWrapper({
     dateIntervals,
-    setDateIntervals
+    setDateIntervals,
+    sliderRef,
 }: {
     dateIntervals: dateInterval[],
-    setDateIntervals: Dispatch<SetStateAction<dateInterval[]>>
+    setDateIntervals: Dispatch<SetStateAction<dateInterval[]>>,
+    sliderRef: RefObject<HTMLDivElement>,
 }) {
 
     const circleRef = useRef(null);
+
     const [circleRotation, setCircleRotation] = useState(0); 
 
     const [circleControls, setCircleControls] = useState({
@@ -39,7 +42,8 @@ export default function CirceWrapper({
                 setCircleControls={setCircleControls}
                 setCircleRotation={setCircleRotation}
                 setDateIntevals={setDateIntervals}
-            ></Circle>
+                sliderRef={sliderRef}
+                ></Circle>
             <CircleControls
                 dateIntervals={dateIntervals}
                 circleRef={circleRef}
@@ -48,7 +52,8 @@ export default function CirceWrapper({
                 setCircleRotation={setCircleRotation}
                 setCircleControls={setCircleControls}
                 setDateIntervals={setDateIntervals}
-            ></CircleControls>
+                sliderRef={sliderRef}
+                ></CircleControls>
             <CircleDates dates={getActiveDates(dateIntervals)}></CircleDates>
         </div>
     );

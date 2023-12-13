@@ -14,9 +14,10 @@ type CircleProps = {
     setCircleControls: Dispatch<SetStateAction<CircleButtonsVisibility>>,
     setCircleRotation: Dispatch<SetStateAction<number>>,
     setDateIntevals: Dispatch<SetStateAction<dateInterval[]>>,
+    sliderRef: RefObject<HTMLDivElement>,
 }
 
-function Circle({circleRef, circleRotation, dateIntervals, setCircleControls, setCircleRotation, setDateIntevals}: CircleProps) {
+function Circle({circleRef, circleRotation, dateIntervals, setCircleControls, setCircleRotation, setDateIntevals, sliderRef}: CircleProps) {
 
     function clickHandlerMarker(e: React.MouseEvent<HTMLElement>) {
         const clickedMarker = e.target;

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -6,13 +6,17 @@ import {ReactComponent as SearchIcon} from './../assets/arrowSlider.svg';
 import SliderItem from './SliderItem';
 import SwiperComponent from './Swiper';
 import { dateInterval } from '../types/dateInterval';
+import { getControllerVisibility } from '../handlers/getControllerVisibility';
+import { gsap } from 'gsap';
+import { getActiveDates } from '../handlers/getActiveDates';
 
 export const Slider = ({
-  dateIntervals
+  dateIntervals,
+  sliderRef,
 }: {
-  dateIntervals: dateInterval[]
+  dateIntervals: dateInterval[],
+  sliderRef: RefObject<any>,
 }) => {
-  const sliderRef = useRef(null);
 
   const handlePrev = useCallback(() => {
     if (!sliderRef.current) return;
@@ -27,6 +31,10 @@ export const Slider = ({
     left: false,
     right: true,
   });
+
+  useEffect(() => {
+    setControllerVisibility(getControllerVisibility(sliderRef.current.swiper));
+  }, []);
 
   return (
     <div className='slider'>

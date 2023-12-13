@@ -3,7 +3,7 @@ import { dateInterval } from "./types/dateInterval";
 export const data: dateInterval[] = [
     {
         firstDate: 1993,
-        lastDate: 1995,
+        lastDate: 1996,
         index: 1,
         currentRotation: 0,
         nextRotation: 0,
@@ -21,11 +21,15 @@ export const data: dateInterval[] = [
             {
                 year: 1995,
                 text: 'But I must explain to you how all this mistaken idea of denouncing pleasure and.'
+            },
+            {
+                year: 1996,
+                text: 'But I must explain to you how all this mistaken idea of denouncing pleasure and.'
             }
         ]
     },
     {
-        firstDate: 1995,
+        firstDate: 1996,
         lastDate: 1999,
         index: 2,
         currentRotation: 0,
@@ -34,15 +38,15 @@ export const data: dateInterval[] = [
         category: 'politics',
         dateEvents: [
             {
-                year: 1995,
+                year: 1996,
                 text: 'Li Europan lingues es membres del sam familie. Lor separat existentie es un myth'
             },
             {
-                year: 1996,
+                year: 1997,
                 text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor'
             },
             {
-                year: 1997,
+                year: 1998,
                 text: 'The European languages are members of the same family. Their separate existence.'
             },
             {
@@ -142,19 +146,19 @@ export const data: dateInterval[] = [
         category: 'events',
         dateEvents: [
             {
-                year: 2014,
+                year: 2018,
                 text: 'Чернокожие становились час от часу все мрачнее и подозрительнее, и появление прошлою ночью'
             },
             {
-                year: 20015,
+                year: 2019,
                 text: 'Рано или поздно они нападут на него, если только он сам на них не обрушится первый'
             },
             {
-                year: 2016,
+                year: 2020,
                 text: 'Либо вызволит «Джесси», либо надо непременно что-нибудь предпринять.'
             },
             {
-                year: 2018,
+                year: 2023,
                 text: 'Редкие острые зубы почернели от жвачки — бетеля, сок которого он выплевывал то и дело.'
             }
         ]
