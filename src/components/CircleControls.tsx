@@ -7,6 +7,7 @@ import { getCircleButtonsVisibility } from "../handlers/getCircleButtonsVisibili
 import { getNewIntervals } from "../handlers/getNewIntervals";
 import CirclePosition from "./CirclePosition";
 import { gsap } from "gsap";
+import CirclePagination from "./CirclePagination";
 
 type CircleControlsProps = {
     dateIntervals: dateInterval[],
@@ -57,25 +58,28 @@ function CircleControls({
 
     return (
         <div className='circle__controls'>
-            <CirclePosition
-                dateIntervals={dateIntervals}
-            ></CirclePosition>
-            <div className='circle__controls-buttons'>
-                <div 
-                    className={`circle__button ${!circleControls.left ? 'circle__button--disabled' : ''}`} 
-                    onClick={handleCircleButtonClick}
-                    data-direction='left'
-                >
-                    <CircleArrow data-direction='left' />
+                <CirclePosition
+                    dateIntervals={dateIntervals}
+                    ></CirclePosition>
+                <div className='circle__controls-buttons'>
+                    <div 
+                        className={`circle__button ${!circleControls.left ? 'circle__button--disabled' : ''}`} 
+                        onClick={handleCircleButtonClick}
+                        data-direction='left'
+                        >
+                        <CircleArrow data-direction='left' />
+                    </div>
+                    <div 
+                        className={`circle__button circle__button--next ${!circleControls.right ? 'circle__button--disabled' : ''}`} 
+                        onClick={handleCircleButtonClick}
+                        data-direction='right'
+                        >
+                        <CircleArrow data-direction='right' />
+                    </div>
                 </div>
-                <div 
-                    className={`circle__button circle__button--next ${!circleControls.right ? 'circle__button--disabled' : ''}`} 
-                    onClick={handleCircleButtonClick}
-                    data-direction='right'
-                >
-                    <CircleArrow data-direction='right' />
-                </div>
-            </div>
+                <CirclePagination
+                    dateIntervals={dateIntervals}
+                ></CirclePagination>
         </div>
     );
 }
