@@ -1,0 +1,17 @@
+var _path;
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+import * as React from "react";
+var SvgArrowCircle = function SvgArrowCircle(props) {
+  return /*#__PURE__*/React.createElement("svg", _extends({
+    xmlns: "http://www.w3.org/2000/svg",
+    width: 10,
+    height: 14,
+    fill: "none"
+  }, props), _path || (_path = /*#__PURE__*/React.createElement("path", {
+    stroke: "#42567A",
+    strokeWidth: 2,
+    d: "M8.5.75 2.25 7l6.25 6.25"
+  })));
+};
+export { SvgArrowCircle as ReactComponent };
+export default "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxMCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTguNDk5ODggMC43NTAwMDFMMi4yNDk4OCA3TDguNDk5ODggMTMuMjUiIHN0cm9rZT0iIzQyNTY3QSIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPiA=";
