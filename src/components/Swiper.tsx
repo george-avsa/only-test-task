@@ -5,8 +5,6 @@ import { getControllerVisibility } from "../handlers/getControllerVisibility";
 import { dateInterval } from "../types/dateInterval";
 import { getActiveInterval } from "../handlers/getActiveInterval";
 import { gsap } from "gsap";
-import { getActiveDates } from "../handlers/getActiveDates";
-import { data } from "../data";
 
 type SwiperProps = {
     sliderRef: RefObject<HTMLDivElement | any>,
@@ -39,8 +37,14 @@ function SwiperComponent({
         <Swiper
             ref={sliderRef}
             spaceBetween={50}
-            slidesPerView={3}
+            slidesPerView={1.5}
             initialSlide={0}
+            breakpoints={{
+                840: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                }
+            }}
             onProgress={handleProgressSwipe}
         >
             {getActiveInterval(dateIntervals).dateEvents.map((dateEvent, i) => (

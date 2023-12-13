@@ -12,7 +12,7 @@ html {
 .wrapper {
     position: relative;
 
-    width: 100vw;
+    width: 90vw;
     height: 100vh;
     // l screens
     // max-width: 1440px;
@@ -22,7 +22,7 @@ html {
     box-sizing: border-box;
     padding: 0px 80px;
 
-    overflow: hidden;
+    // overflow: hidden;
 
     display: flex;
     flex-direction: column;
@@ -30,6 +30,23 @@ html {
 
     @media screen and (max-width: 1500px) {
         padding: 40px 80px;
+    }
+
+    @media screen and (max-width: 1000px) {
+        padding: 10px 20px;
+        display: block;
+    }
+
+    @media screen and (max-width: 1000px) and (orientation: portrait) {
+        padding: 60px 20px;
+        display: flex;
+        overflow: hidden;
+    }
+}
+
+.wrapper__line {
+    @media screen and (max-width: 1000px) and (orientation: portrait) {
+        display: none;
     }
 }
 
@@ -55,6 +72,10 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media screen and (max-width: 1000px) and (orientation: portrait) {
+        border-bottom: 1px solid #C7CDD9;
+    }
 }
 
 .circle {
@@ -78,6 +99,10 @@ html {
         height: 350px;
         top: calc(50% - 185px);
         left: calc(50% - 175px);
+    }
+
+    @media screen and (max-width: 1000px) and (orientation: portrait) {
+        display: none;
     }
 }
 
@@ -113,6 +138,12 @@ html {
     justify-content: center;
     scale: 0; transform: translate(0px); translate: none; rotate: none;
     
+}
+
+.swiper-slide:not(.swiper-slide-active) {
+    @media screen and (max-width: 1000px) and (orientation: portrait) {
+        opacity: .5;
+    }
 }
 
 .marker__hover--active { 
@@ -159,6 +190,10 @@ h1 {
     @media screen and (max-width: 1500px) {
         font-size: 48px;
     }
+
+    @media screen and (max-width: 1000px) and (orientation: portrait) {
+        font-size: 20px; 
+    }
 }
 
 .title__line {
@@ -177,6 +212,11 @@ h1 {
     margin-top: -3%;
 
     transition: rotate 1s ease-out;
+    @media screen and (max-width: 1000px) and (orientation: portrait) {
+        width: 100%;
+        gap: 0;
+        justify-content: space-between;
+    }
 }
 
 .circle__date {
@@ -197,10 +237,19 @@ h1 {
     &--second {
         color: #EF5DA8;
     }
+
+    @media screen and (max-width: 1000px) and (orientation: portrait) {
+        font-size: 56px;
+    }
 }
 
 .slider {
     position: relative;
+    
+    @media screen and (max-width: 1000px) {
+        margin-top: 60px;
+        margin-bottom: 40px;
+    }
 }
 
 .swiper-button-prev, .swiper-button-next {
@@ -278,6 +327,10 @@ h1 {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
+    @media screen and (max-width: 1000px) {
+        display: none;
+    }
     
     &--left{
        left: -60px;
@@ -288,7 +341,13 @@ h1 {
 .circle__controls {
     position: absolute;
     left: 0;
-    bottom: 0
+    bottom: 0;
+
+    @media screen and (max-width: 1000px) and (orientation: portrait) {
+        position: fixed;
+        left: 20px;
+        bottom: 15px;
+    }
 }
 
 .circle__position {
@@ -300,34 +359,77 @@ h1 {
     line-height: normal; 
 }
 
+.circle__pagination {
+    display: none;
+
+    @media screen and (max-width: 1000px) and (orientation: portrait) {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+
+        position: fixed;
+        left: 0px;
+        bottom: 32px;
+
+        width: 100%;
+    }
+}
+
+.pagination__item {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    opacity: .4;
+    background-color: #42567A;
+
+    transition: opacity 1s ease-out;
+}
+
+.pagination__item--active {
+    opacity: 1;
+}
+
 .circle__controls-buttons {
     display: flex;
 
     margin-top: 20px;
+    
+    @media screen and (max-width: 1000px) and (orientation: portrait) {
+        margin-top: 10px;
+    }
 }
 
 .circle__button {
     width: 50px;
     height: 50px;
-
+    
     border-radius: 50%;
     border: 2px solid rgba(66, 86, 122, .5);
-
+    
     display: flex;
     align-items: center;
     justify-content: center;
-
+    
     cursor: pointer;
-
+    
     background-image: url('./assets/arrowCircle.svg');
     background-position: center;
-
+    
     &:not(:first-child) {
         margin-left: 10px;
         rotate: 180deg;
     }
-
+    
     &--disabled {
         opacity: .5;
+    }
+
+    @media screen and (max-width: 1000px) and (orientation: portrait) {
+        width: 25px;
+        height: 25px;
+
+        svg {
+            scale: .8;
+        }
     }
 }
