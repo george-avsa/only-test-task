@@ -6,7 +6,7 @@ export function getNewIntervals(dateIntevals: dateInterval[], indexClicked: numb
     const newDateIntervals = [...dateIntevals.slice(indexClicked, dateIntevals.length), ...dateIntevals.slice(0, indexClicked)]
     const rotationStep = 360 / newDateIntervals.length;
     let initialRotation = 30;
-    const newkeklol  = newDateIntervals.map((dateInteval, i) => {
+    const sortedDateInterval  = newDateIntervals.map((dateInteval, i) => {
         const nextMarkerRotation = getMinimizedRotation(initialRotation)
         initialRotation += rotationStep
         if (dateInteval.index === indexClicked + 1) {
@@ -14,5 +14,5 @@ export function getNewIntervals(dateIntevals: dateInterval[], indexClicked: numb
         }
         return {...dateInteval, active: false, nextRotation: nextMarkerRotation}
     });
-    return newkeklol;
+    return sortedDateInterval;
 }

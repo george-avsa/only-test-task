@@ -5,9 +5,9 @@ export function generateRotationMap(dateIntervals: dateInterval[]): dateInterval
     let initialRotation = 30;
     const rotationStep = 360 / dateIntervals.length;    const dateIntervalsMapped = dateIntervals.map(dateInterval => {
         const nextRotation = getMinimizedRotation(initialRotation)
-        const keklol = {...dateInterval, currentRotation: initialRotation, nextRotation};
+        const rotationMap = {...dateInterval, currentRotation: initialRotation, nextRotation};
         initialRotation += rotationStep
-        return keklol;
+        return rotationMap;
     }); 
     return dateIntervalsMapped;
 }

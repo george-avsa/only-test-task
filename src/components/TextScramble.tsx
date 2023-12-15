@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 
-type  keklol = ReturnType<typeof setInterval>;
+type  intervalId = ReturnType<typeof setInterval>;
 
 function TextScramble({
     intervalId,
     setIntervalId,
     children
-}: {children: string, intervalId: keklol | null, setIntervalId: Dispatch<SetStateAction<keklol>>}) {
+}: {children: string, intervalId: intervalId | null, setIntervalId: Dispatch<SetStateAction<intervalId>>}) {
 
     const [localDate, setLocalDate] = useState(children);
 
@@ -20,13 +20,13 @@ function TextScramble({
         const step = difference / (currentDate - prevDate) || 0;
         setLocalDate(() => String(prevDate));
         if (currentDate - prevDate) {
-            let keklol = setInterval(() => {
+            let localIntervalId = setInterval(() => {
                 setLocalDate(localDate => String(Number.parseInt(localDate) + step));
             }, 1000 / difference);
             if (setIntervalId !== null) {
                 clearInterval(intervalId);
             }
-            setIntervalId(() => keklol);
+            setIntervalId(() => localIntervalId);
         }
         prevValue.current = children;
 
